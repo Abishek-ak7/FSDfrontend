@@ -32,7 +32,7 @@ const App = () => {
     if (!validate()) return;
 
     try {
-      const response = await fetch('http://localhost:8080/api/employees', {
+      const response = await fetch('https://fsd-backend-swart.vercel.app/api/employees', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -86,7 +86,7 @@ const App = () => {
           { label: 'Employee ID', name: 'employeeId', type: 'text', error: errors.employeeId },
           { label: 'Email', name: 'email', type: 'email', error: errors.email },
           { label: 'Phone Number', name: 'phoneNumber', type: 'text', error: errors.phoneNumber },
-          { label: 'Date of Joining', name: 'dateOfJoining', type: 'date', error: errors.dateOfJoining },
+          { label: 'Date of Joining', name: 'dateOfJoining', type: 'date', error: errors.dateOfJoining , },
           { label: 'Role', name: 'role', type: 'text', error: errors.role },
         ].map(({ label, name, type, error }, index) => (
           <div key={index} className="mb-4">
@@ -96,6 +96,7 @@ const App = () => {
               name={name}
               value={formData[name]}
               onChange={handleChange}
+              max={new Date().toISOString().split("T")[0]}
               className="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-300"
             />
             {error && <span className="text-red-500 text-sm">{error}</span>}
